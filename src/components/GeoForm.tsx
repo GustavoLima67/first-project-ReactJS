@@ -1,4 +1,4 @@
-import { Circle } from "./Circle"
+import { Circle } from "./circle"
 import { Square } from "./square"
 
 export const GeoForm =()=> {
@@ -8,7 +8,7 @@ export const GeoForm =()=> {
             <h3>Algum texto aleatorio</h3>
             
             <div className="flex gap-2 border-2 p-3">
-                <Square />
+                <Square/>
                 <Circle/>
             </div>
 

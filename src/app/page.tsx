@@ -1,9 +1,9 @@
-import { GeoForm } from "@/components/GeoForm";
+import { Person } from "@/components/person";
 
 const Page = () => {
   return (
     <div>
-      <GeoForm/>
+      <Person/>
     </div>
   )
 }
