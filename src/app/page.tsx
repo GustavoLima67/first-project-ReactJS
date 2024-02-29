@@ -1,15 +1,9 @@
-import { Circle, Square } from "@/components/geo";
+import { GeoForm } from "@/components/GeoForm";
 
-function Page() {
+const Page = () => {
   return (
     <div>
-      <h1 className="font-bold text-2xl">Ola mundo</h1>
-      <h3>Algum texto aleatorio</h3>
-    
-
-    <Square/>
-    <Circle/>
-    
+      <GeoForm/>
     </div>
   )
 }
