@@ -5,7 +5,7 @@ const Page = () => {
   return(
   
     <div className="w-screen h-screen flex justify-center items-center">
-      <EmojiRating rate={4.5}/>
+      <EmojiRating rate={0}/>
     </div>
 
   )
