@@ -3,20 +3,19 @@
 import { useState } from "react";
 
 const Page = () => {
-  const [nameInput, setNameInput] = useState('');
+  const [count, setCount] = useState(0);
 
-  const handleBtnClick = () => alert("seu nome é "+ nameInput);
+  //Para Atulizar conforme o codigo requerido, devemos criar uma "Arroy Function".
+  const handleBtnClick = () => {
+    setCount(count + 2);
+    setCount(c => c + 2);  // Arroy Function
+    setCount(c => c + 2);
+  }
   
   return(
     <div className="w-screen h-screen flex flex-col justify-center items-center text-3xl">
-     <input type="text" 
-     className="border border-black p-3 text-3xl text-black rounded"
-     placeholder="Digite seu nome"
-     value={nameInput}
-     onChange={e => setNameInput(e.target.value)}/>
-     <p>seu nome é {nameInput} </p>
-    <button onClick={handleBtnClick}>Mostrar valor do campo</button>
-    
+      <p>{count}</p>
+      <button onClick={handleBtnClick} className="bg-blue-700 text-white p-3 rounded-md">+6</button>
     </div>
   );
 
