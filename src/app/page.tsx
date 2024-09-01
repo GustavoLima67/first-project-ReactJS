@@ -1,48 +1,47 @@
 "use client"
 
 import { Person } from "@/types/Person";
+import { TodoItem } from "@/types/TodoItem";
 import { useState } from "react";
 
 const Page = () => {
-  const [fullName, setFullName] = useState<Person>({name: 'Gustavo', lastName: 'Lima'});
+  const [itemInput, setItemInput] = useState('');
+  const [list, setList] = useState<TodoItem[]>([
+    {label: 'Fazer dever de casa', checked: false},
+    {label: 'Comprar o bolo', checked: false}
+  ]);
   
-  // Para pegar esse valor, e poder trocar o valor há duas possibilidades: 
-  // 1 - Pegar o valor com o onChange, usar funçao Event, e trocar TODAS as informações usando o Type.
-  // De certa forma resolve o problema... Mas tras consigo um codigo muito mal estruturado e linhas de codigos desnessarias.
-
-  // 2 - Clonar o Objeto como está no codigo fonte abaixo - " ...fullName ". Primeiro clona esse PROPS, que contem todas as lista.
-  // Depois apenas pegue o valor que deseja alterar com o "event, target e value" 
-  // Com a segunda forma trás um código limpo, linhas de códigos apenas necessarias e de certa forma um encapsulamento
-
-  const handleClearButton = () => {
-    setFullName({ name: '', lastName: ''})
+  const handleAddButton = () => {
+    setList([ ...list, { label: itemInput, checked: false } ]); //adicionar um novo item, em uma lista de array com States
+    setItemInput('');
   }
 
-  // Vemos o Código acima demostrando utilidades para usar o State com Objetos caso queria trocar tudo. "setFullName({ name: '', lastName: ''})"
-  // Caso queria trocar apenas um objeto da lista. "setFullName({ ...fullName, name: '' })"
-  // obs: funcionalidade para buttoes. 
-  
+  const handleDellButton = () => {
+    setList([ ...list, {label: '', checked: false} ])
+  }
+
   return(
-    <div className="w-screen h-screen flex flex-col justify-center items-center text-3xl">
-      <input type="text" 
-      placeholder="Name"
-      className="border border-black p-3 text-2xl text-black rounded-md mb-3"
-      value={fullName.name}
-      onChange={e => setFullName({ ...fullName, name: e.target.value }) }/>
+    <div className="w-screen h-screen flex flex-col items-center text-2xl">
+      <h1 className="text-4xl mt-5">Lista de Tarefas</h1>
 
-      <input type="text" 
-      placeholder="Sobrenome"
-      className="border border-black p-3 text-2xl text-black rounded-md mb-3"
-      value={fullName.lastName}
-      onChange={e => setFullName({ ...fullName, lastName: e.target.value }) }/>
+      <div className="flex w-full max-w-lg my-3 p-4 rounded-md bg-gray-700 border-2 border-gray-700">
+        <input type="text" 
+        placeholder="O que deseja fazer?"
+        className="flex-1 border border-black p-3 text-2xl text-black rounded-md mr-3"
+        value={itemInput}
+        onChange={e => setItemInput(e.target.value)}/>
 
-      <p>Meu nome completo é:</p>
-      <p>{fullName.name} {fullName.lastName}</p>
+        <button onClick={handleAddButton}>Adicinoar</button>
+      </div>
 
-      <button 
-      onClick={handleClearButton} 
-      className="rounded-md border border-white bg-white text-black p-2 m-3">Limpar Tudo
-      </button>
+      <p className="my-4">{list.length} items na lista</p>
+    
+    <ul className="w-full max-w-lg list-disc pl-5">
+      {list.map(item => (
+        <li>{item.label} - <button className="hover:underline" > [deletar] </button></li>
+      ))}
+      
+      </ul>
     </div>
   );
 
